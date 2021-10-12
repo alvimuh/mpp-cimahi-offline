@@ -1,0 +1,32 @@
+.select {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  list-style: none;
+  padding: 12px;
+}
+.select .item {
+  display: block;
+  border: 2px solid #dee0e2;
+  border-radius: 8px;
+  box-shadow: 0 4px 3px rgba(0, 0, 0, 0.07);
+  cursor: pointer;
+}
+.select .item.active {
+  border: 2px solid #547a9f;
+}
+.select img {
+  height: 100px;
+  width: auto;
+  max-width: 100%;
+  margin: 24px;
+  margin: auto;
+  display: block;
+  margin-bottom: 12px;
+}
+.select h3 {
+  font-size: 12pt;
+  margin: 0 24px;
+  text-align: center;
+  color: #283746;
+}
