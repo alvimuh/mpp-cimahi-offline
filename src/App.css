@@ -1,6 +1,7 @@
 * {
-  margin: 0;
+  box-sizing: border-box;
   padding: 0;
+  margin: 0;
 }
 .App {
   text-align: center;
@@ -19,8 +20,9 @@
 
 main {
   background: linear-gradient(45deg, #34495e, #547a9f);
-  min-height: 100vh;
+  height: 100vh;
   font-size: calc(10px + 2vmin);
+  overflow: auto;
 }
 .container {
   max-width: 1280px;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import "./style.css";
 
@@ -45,13 +45,41 @@ function LihatAntrian() {
       loket: "8",
     },
   ]);
-  //   if(live update){
-  //     return(
-  //         "tampilkan nomor, nama, foto"
-  //     )
-  //   }
+  const [calling, setCalling] = useState(false);
+
+  useEffect(() => {
+    if (calling) {
+      setTimeout(() => {
+        setCalling(false);
+      }, 5000);
+    }
+  }, [calling]);
+
+  if (calling) {
+    return (
+      <main id="calling">
+        <div className="left">
+          <h1>Nomor Antrian:</h1>
+          <p>300</p>
+        </div>
+        <div className="right">Hello</div>
+      </main>
+    );
+  }
   return (
     <main>
+      <button
+        style={{
+          position: "absolute",
+          bottom: 25,
+          left: 25,
+        }}
+        onClick={() => {
+          setCalling(true);
+        }}
+      >
+        Simulasi
+      </button>
       <div className="grid">
         {data.map((item) => (
           <div className="item">
