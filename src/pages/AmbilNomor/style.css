@@ -12,6 +12,7 @@
   box-shadow: 0 4px 3px rgba(0, 0, 0, 0.07);
   cursor: pointer;
   padding: 6px 0;
+  background: #fff;
 }
 .select .item.active {
   border: 2px solid #547a9f;
@@ -42,15 +43,19 @@
   width: 35%;
 }
 .result h1,
+.result h3,
 .result h4 {
   text-align: center;
   color: #283746;
 }
 .result h1 {
-  font-size: 88pt;
+  font-size: 86pt;
   font-weight: 500;
 }
-
+.result h3 {
+  font-size: 34pt;
+  margin-bottom: 24px;
+}
 .result table {
   margin: auto;
   color: #283746;

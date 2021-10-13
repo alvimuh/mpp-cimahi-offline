@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 // import PropTypes from "prop-types";
 import "./style.css";
-import { useHistory } from "react-router-dom";
 import Webcam from "../../components/WebCam/Webcam";
 import axios from "axios";
 import { useAntrian } from "./context";
 
 function IsiIdentitasTab() {
-  const history = useHistory();
   const { state, dispatch } = useAntrian();
   const [data, setData] = useState({
     nik: "",
@@ -43,10 +41,7 @@ function IsiIdentitasTab() {
         type: "SET_ANTRIAN",
         data: res.data,
       });
-      history.push("/ambil-nomor/langkah-3");
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const inputChangeHandler = (event) => {
@@ -56,12 +51,6 @@ function IsiIdentitasTab() {
     }));
   };
 
-  if (state.layananSelected === null) {
-    dispatch({
-      type: "CLEAR",
-    });
-    history.push("/ambil-nomor/langkah-1");
-  }
   return (
     <form onSubmit={submitHandler} autoComplete="off">
       <div className="row">
@@ -90,7 +79,7 @@ function IsiIdentitasTab() {
             />
           </div>
           <button type="submit" className="cta" disabled={state.ctaDisabled}>
-            Lanjutkan
+            {state.ctaDisabled ? "Harap tunggu" : "Lanjutkan"}
           </button>
         </div>
       </div>

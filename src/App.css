@@ -21,14 +21,14 @@ main {
   background: linear-gradient(45deg, #34495e, #547a9f);
   min-height: 100vh;
   font-size: calc(10px + 2vmin);
-  /* padding: 12px; */
+  padding: 18px 0;
 }
 .container {
   max-width: 1280px;
   margin: auto;
 }
 .wrapper {
-  background: #fff;
+  background: #ffffff;
   border-radius: 12px;
   overflow: hidden;
 }
@@ -46,7 +46,7 @@ main {
   display: block;
   font-size: 24pt;
   padding: 24px 34px;
-  border: 2px solid #dee0e2;
+  border: 2px solid #adb2b6;
   border-radius: 8px;
   box-shadow: 0 4px 3px rgba(0, 0, 0, 0.07);
   width: 100%;
@@ -59,15 +59,16 @@ main {
 .steps-line {
   list-style: none;
   display: flex;
-  background: #ebeef1;
+  background: #f1f4f7;
 }
 
 .steps-line li {
   flex: 1;
   padding: 12px 18px;
+  opacity: 0.4;
 }
 .steps-line li.active {
-  background: #f8fafc;
+  opacity: 1;
 }
 .steps-line li {
   text-decoration: none;
@@ -87,8 +88,11 @@ button {
   background: linear-gradient(45deg, #34495e, #547a9f);
   color: white;
   border-radius: 6px;
-  padding: 12px 18px;
-  font-weight: 700;
+  padding: 18px 34px;
+  font-weight: 500;
+  margin: auto;
+  display: block;
+  font-size: 14pt;
 }
 button:disabled {
   opacity: 0.5;

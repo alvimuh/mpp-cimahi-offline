@@ -9,17 +9,14 @@ import { useHistory } from "react-router-dom";
 import { AntrianContext, useAntrian } from "./context";
 
 function PilihLayananTab(props) {
-  const { state: antrianState, dispatch } = useAntrian();
-  const history = useHistory();
-
-  const [toNextStep, setToNextStep] = useState(false);
+  const { state, dispatch } = useAntrian();
 
   const fetchLayanan = async () => {
     dispatch({
       type: "LOADING",
     });
     const res = await axios.get(
-      `${process.env.REACT_APP_API_URL}/layanan/${antrianState.instansiSelected}`
+      `${process.env.REACT_APP_API_URL}/layanan/${state.instansiSelected}`
     );
     dispatch({
       type: "SET_LAYANAN",
@@ -43,7 +40,7 @@ function PilihLayananTab(props) {
 
   return (
     <div>
-      {antrianState.loading ? (
+      {state.loading ? (
         <div>
           <ul className="select">
             {[...Array(8)].map(() => (
@@ -53,9 +50,9 @@ function PilihLayananTab(props) {
             ))}
           </ul>
         </div>
-      ) : antrianState.step === 0 ? (
+      ) : state.step === 0 ? (
         <Carousel plugins={["arrows"]}>
-          {groupByN(8, antrianState.instansi).map((group, indexGroup) => (
+          {groupByN(8, state.instansi).map((group, indexGroup) => (
             <ul className="select" key={indexGroup}>
               {group.map((item, indexItem) => (
                 <li
@@ -67,7 +64,7 @@ function PilihLayananTab(props) {
                     })
                   }
                   className={`item ${
-                    antrianState.instansiSelected === item.id && "active"
+                    state.instansiSelected === item.id && "active"
                   }`}
                 >
                   <img
@@ -82,7 +79,7 @@ function PilihLayananTab(props) {
         </Carousel>
       ) : (
         <Carousel plugins={["arrows"]}>
-          {groupByN(8, antrianState.layanan).map((group, indexGroup) => (
+          {groupByN(8, state.layanan).map((group, indexGroup) => (
             <ul className="select" key={indexGroup}>
               {group.map((item, indexItem) => (
                 <li
@@ -94,7 +91,7 @@ function PilihLayananTab(props) {
                     })
                   }
                   className={`item ${
-                    antrianState.layananSelected === item.id && "active"
+                    state.layananSelected === item.id && "active"
                   }`}
                 >
                   <img
@@ -110,22 +107,21 @@ function PilihLayananTab(props) {
       )}
       <button
         className="cta"
-        disabled={antrianState.ctaDisabled || props.loading}
+        disabled={state.ctaDisabled || props.loading}
         onClick={() => {
-          if (antrianState.step === 0) {
+          if (state.step === 0) {
             fetchLayanan();
           } else {
             dispatch({
               type: "SWITCH_STEP",
-              to: 3,
+              to: 2,
             });
-            history.push("/ambil-nomor/langkah-2");
           }
         }}
       >
-        {antrianState.loading
+        {state.loading
           ? "Harap tunggu"
-          : antrianState.step === 0
+          : state.step === 0
           ? "Pilih Instansi"
           : "Pilih Layanan"}
       </button>

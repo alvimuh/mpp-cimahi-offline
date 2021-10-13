@@ -26,22 +26,29 @@ function AmbilNomor() {
         {({ state }) => (
           <main>
             <div className="container">
-              <h1>Ambil Nomor {state.step}</h1>
               <div className="wrapper">
                 <ul className="steps-line">
-                  <li className={state.step === 0 || state.step === 1}>
+                  <li
+                    className={
+                      state.step === 0 || state.step === 1 ? "active" : ""
+                    }
+                  >
                     {/* <Link to={match.url + "/langkah-1"}> */}
                     <img src={select} alt="Pilih Layanan" />
                     <span>Pilih tenant dan layanan</span>
                     {/* </Link> */}
                   </li>
-                  <li className={state.step === 2}>
+                  <li className={state.step === 2 ? "active" : ""}>
                     {/* <Link to={match.url + "/langkah-2"}> */}
                     <img src={identity} alt="Isi Identitas" />
                     <span>Isi Identitas</span>
                     {/* </Link> */}
                   </li>
-                  <li className={state.step === 3}>
+                  <li
+                    className={
+                      state.step === 3 || state.step === 4 ? "active" : ""
+                    }
+                  >
                     {/* <Link to={match.url + "/langkah-3"}> */}
                     <img src={waiting} alt="Ambil Nomor Antrian" />
                     <span>Ambil nomor antrian</span>
@@ -53,7 +60,7 @@ function AmbilNomor() {
                     <PilihLayananTab />
                   ) : state.step === 2 ? (
                     <IsiIdentitasTab />
-                  ) : state.step === 3 ? (
+                  ) : state.step === 3 || state.step === 4 ? (
                     <LihatAntrian />
                   ) : (
                     <></>

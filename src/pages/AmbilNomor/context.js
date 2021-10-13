@@ -53,6 +53,7 @@ function reducer(state, action) {
       return {
         ...state,
         antrian: action.data,
+        step: 3,
       };
     }
     case "SWITCH_INSTANSI": {
