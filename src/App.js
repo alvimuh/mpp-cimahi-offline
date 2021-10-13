@@ -1,7 +1,6 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import AmbilNomor from "./pages/AmbilNomor/index";
+import AmbilNomor from "./pages/AmbilNomor/Index";
 
 function App() {
   return (

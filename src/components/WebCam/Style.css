@@ -1,0 +1,16 @@
+.webcam button {
+  background: linear-gradient(45deg, #ffd217, #fdad00);
+  color: black;
+  display: block;
+  width: 80%;
+  margin: auto;
+  margin-top: -25px;
+  z-index: 1;
+  position: relative;
+}
+.webcam video,
+.webcam img {
+  border-radius: 6px;
+  overflow: hidden;
+  background: #000;
+}

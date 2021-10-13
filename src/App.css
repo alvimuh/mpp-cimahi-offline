@@ -21,47 +21,65 @@ main {
   background: linear-gradient(45deg, #34495e, #547a9f);
   min-height: 100vh;
   font-size: calc(10px + 2vmin);
-  padding: 12px;
+  /* padding: 12px; */
 }
 .container {
-  max-width: 1024px;
+  max-width: 1280px;
   margin: auto;
 }
 .wrapper {
   background: #fff;
-  padding: 34px;
   border-radius: 12px;
+  overflow: hidden;
 }
-
+.content {
+  padding: 34px;
+}
+.form-group {
+  margin-bottom: 24px;
+}
 .form-group label {
   display: block;
+  margin-bottom: 8px;
 }
 .form-group input {
   display: block;
-  font-size: 32pt;
+  font-size: 24pt;
   padding: 24px 34px;
+  border: 2px solid #dee0e2;
+  border-radius: 8px;
+  box-shadow: 0 4px 3px rgba(0, 0, 0, 0.07);
+  width: 100%;
+  box-sizing: border-box;
 }
-
+.form-group input:focus {
+  outline-color: #547a9f;
+  border: 2px solid #dee0e2;
+}
 .steps-line {
   list-style: none;
   display: flex;
+  background: #ebeef1;
 }
+
 .steps-line li {
   flex: 1;
-  position: relative;
+  padding: 12px 18px;
+}
+.steps-line li.active {
+  background: #f8fafc;
+}
+.steps-line li {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 .steps-line li span {
-  width: 24px;
-  height: 24px;
-  display: block;
-  position: absolute;
-  bottom: 0;
-  font-size: 14pt;
-  text-align: center;
-  border-radius: 12px;
-  background: white;
-  text-decoration: none;
-  color: #34495e;
+  color: #547a9f;
+  font-size: 20pt;
+  font-weight: 300;
+  line-height: 1;
+  margin-left: 8px;
 }
 button {
   cursor: pointer;
@@ -69,6 +87,8 @@ button {
   background: linear-gradient(45deg, #34495e, #547a9f);
   color: white;
   border-radius: 6px;
+  padding: 12px 18px;
+  font-weight: 700;
 }
 button:disabled {
   opacity: 0.5;
@@ -76,7 +96,6 @@ button:disabled {
 }
 button.cta {
   width: 100%;
-  padding: 12px;
   font-weight: 400;
   font-size: 18pt;
   text-transform: uppercase;
