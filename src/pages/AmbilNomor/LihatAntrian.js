@@ -3,16 +3,25 @@ import React from "react";
 import "./style.css";
 import { queuePad } from "../../utility";
 import { useAntrian } from "./context";
-import { useHistory } from "react-router";
 
 function LihatAntrian() {
   const { state, dispatch } = useAntrian();
-  const history = useHistory();
-  if (state.antrian === null) {
-    dispatch({
-      type: "CLEAR",
-    });
-    history.push("/ambil-nomor/langkah-1");
+  if (state.step === 4) {
+    return (
+      <div className="result">
+        <h3>Berhasil!</h3>
+        <button
+          type="button"
+          onClick={() => {
+            dispatch({
+              type: "CLEAR",
+            });
+          }}
+        >
+          Kembali
+        </button>
+      </div>
+    );
   }
   return (
     <div className="result">
@@ -37,9 +46,9 @@ function LihatAntrian() {
         className="cta"
         onClick={() => {
           dispatch({
-            type: "CLEAR",
+            type: "SWITCH_STEP",
+            to: 4,
           });
-          history.push("/ambil-nomor/langkah-1");
         }}
       >
         Ambil
