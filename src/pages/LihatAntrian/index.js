@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import { queuePad } from "../../utility";
 import "./style.css";
 
 function LihatAntrian() {
@@ -46,23 +46,63 @@ function LihatAntrian() {
     },
   ]);
   const [calling, setCalling] = useState(false);
-
-  useEffect(() => {
-    if (calling) {
-      setTimeout(() => {
-        setCalling(false);
-      }, 5000);
+  const playing = async (url) => {
+    await new Promise((resolve) => {
+      const audio = new Audio(url);
+      audio.onended = resolve;
+      audio.play();
+    });
+  };
+  const spell = async (num) => {
+    if (num.length === 1) {
+      await playing(process.env.PUBLIC_URL + "/sound/" + num[0] + ".wav");
+    } else {
+      // if (num.length === 3) {
+      //   if (num[0] === "1") {
+      //     await playing(process.env.PUBLIC_URL + "/sound/seratus.wav");
+      //   } else {
+      //     await playing(process.env.PUBLIC_URL + "/sound/" + num[0] + ".wav");
+      //     await playing(process.env.PUBLIC_URL + "/sound/ratus.wav");
+      //   }
+      // }
+      if (num[0] === "1" && num[1] === "0") {
+        await playing(process.env.PUBLIC_URL + "/sound/sepuluh.wav");
+      } else if (num[0] === "1" && num[1] === "1") {
+        await playing(process.env.PUBLIC_URL + "/sound/sebelas.wav");
+      } else if (num[0] === "1") {
+        await playing(process.env.PUBLIC_URL + "/sound/" + num[1] + ".wav");
+        await playing(process.env.PUBLIC_URL + "/sound/belas.wav");
+      } else {
+        await playing(process.env.PUBLIC_URL + "/sound/" + num[0] + ".wav");
+        await playing(process.env.PUBLIC_URL + "/sound/puluh.wav");
+        await playing(process.env.PUBLIC_URL + "/sound/" + num[1] + ".wav");
+      }
     }
-  }, [calling]);
+  };
+  const newAntrianHandler = async (data) => {
+    setCalling(data);
+    await playing(process.env.PUBLIC_URL + "/sound/nomor-urut.wav");
+    await spell(data.urutan + "");
+    await playing(process.env.PUBLIC_URL + "/sound/loket.wav");
+    await spell(data.loket + "");
+    setCalling(null);
+  };
 
   if (calling) {
     return (
       <main id="calling">
         <div className="left">
           <h1>Nomor Antrian:</h1>
-          <p>300</p>
+          <p className="number">{queuePad(calling.urutan)}</p>
+          <p className="locket">LOKET {calling.loket}</p>
         </div>
-        <div className="right">Hello</div>
+        <div className="right">
+          <div className="box">
+            <img src={calling.avatar_url} alt="foto" />
+            <h1>{calling.name}</h1>
+            <p>NIK:{calling.nik}</p>
+          </div>
+        </div>
       </main>
     );
   }
@@ -75,7 +115,20 @@ function LihatAntrian() {
           left: 25,
         }}
         onClick={() => {
-          setCalling(true);
+          newAntrianHandler({
+            id: 1,
+            name: "Alvira",
+            nik: "10517094",
+            avatar: "1634167153_foto_Alvira.jpg",
+            status_terlayani: "BELUM_TERLAYANI",
+            urutan: 1,
+            sub_layanan_id: 1,
+            loket: 1,
+            created_at: "2021-10-13T23:19:13.000000Z",
+            updated_at: "2021-10-13T23:19:13.000000Z",
+            avatar_url:
+              "http://localhost:8000/visitor_photos/1634167153_foto_Alvira.jpg",
+          });
         }}
       >
         Simulasi
