@@ -1,20 +1,19 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import AmbilNomor from "./pages/AmbilNomor/Index";
+import AmbilNomor from "./pages/AmbilNomor";
+import LihatAntrian from "./pages/LihatAntrian";
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/tukar-kode-booking">
-          <div>tukar kode booking</div>
+        <Route path="/lihat-antrian">
+          <LihatAntrian />
         </Route>
         <Route path="/ambil-nomor">
           <AmbilNomor />
         </Route>
-        <Route path="/">
-          <div>home</div>
-        </Route>
+        <Route path="/"></Route>
       </Switch>
     </Router>
   );

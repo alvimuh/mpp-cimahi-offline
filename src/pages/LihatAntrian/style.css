@@ -1,0 +1,26 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  padding: 12px;
+}
+.item {
+  border: rgb(218, 218, 218) 2px solid;
+  padding: 24px;
+  text-align: center;
+}
+.item h3 {
+  color: white;
+  font-size: 48pt;
+}
+.item .name {
+  color: white;
+  font-size: 24pt;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.item .locket {
+  color: yellow;
+  font-size: 24pt;
+  font-weight: 700;
+}
