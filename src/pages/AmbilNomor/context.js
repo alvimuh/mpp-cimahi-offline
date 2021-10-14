@@ -25,6 +25,13 @@ function reducer(state, action) {
         ctaDisabled: true,
       };
     }
+    case "STOP_LOADING": {
+      return {
+        ...state,
+        loading: false,
+        ctaDisabled: false,
+      };
+    }
     case "SWITCH_STEP": {
       return {
         ...state,
