@@ -120,6 +120,7 @@ function LihatAntrian() {
 
     const channel = pusher.subscribe('panggiAntrian');
     channel.bind('panggil_antrian', (antrianData) => {
+      console.log("LOG DATA : ", data);
       data.map((el) => {
         if (el.loket == antrianData.no_loket) {
           el.name = antrianData.name
@@ -134,7 +135,7 @@ function LihatAntrian() {
             avatar_url: antrianData.avatar
       })
 
-      setData(data.sort((a,b) => (a.loket > b.loket) ? 1 : ((b.loket > a.loket) ? -1 : 0))
+      setData(data.sort((a,b) => (a.loket > b.loket) ? 1 : ((b.loket > a.loket) ? -1 : 0)))
     })
 
   }, [])
