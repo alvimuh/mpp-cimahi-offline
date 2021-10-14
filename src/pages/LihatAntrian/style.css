@@ -9,21 +9,31 @@
   border: rgb(218, 218, 218) 2px solid;
   padding: 24px;
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.grid .item .wrapper {
+  margin: auto;
+  background: transparent;
 }
 .grid .item h3 {
   color: white;
   font-size: 48pt;
+  height: 80px;
 }
 .grid .item .name {
   color: white;
   font-size: 24pt;
   font-weight: 500;
   margin-bottom: 12px;
+  height: 40px;
 }
 .grid .item .locket {
   color: #ffd217;
   font-size: 24pt;
   font-weight: 700;
+  height: 40px;
 }
 
 #calling {
@@ -66,9 +76,10 @@
 }
 #calling .right .box {
   background: white;
-  border-radius: 8px;
   margin: auto;
   overflow: hidden;
+  width: 80%;
+  padding: 34px 0;
 }
 #calling .right h1 {
   color: #061729;

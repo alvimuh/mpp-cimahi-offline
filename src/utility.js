@@ -4,6 +4,9 @@ export const groupByN = (n, data) => {
   return result;
 };
 export const queuePad = (num) => {
+  if (!num) {
+    return "-";
+  }
   let str = "" + num;
   let pad = "000";
   return pad.substring(0, pad.length - str.length) + str;

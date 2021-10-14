@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { queuePad } from "../../utility";
 import "./style.css";
-import axios from 'axios';
-import Pusher from 'pusher-js';
+import axios from "axios";
+import Pusher from "pusher-js";
 
 function LihatAntrian() {
   const [data, setData] = useState([]);
@@ -40,18 +40,39 @@ function LihatAntrian() {
       }
     }
   };
-  const newAntrianHandler = async (data) => {
-    setCalling(data);
+  const newAntrianHandler = async (newData) => {
+    setCalling(newData);
     await playing(process.env.PUBLIC_URL + "/sound/nomor-urut.wav");
-    await spell(data.urutan + "");
+    await spell(newData.urutan + "");
     await playing(process.env.PUBLIC_URL + "/sound/loket.wav");
-    await spell(data.loket + "");
+    await spell(newData.loket + "");
+
+    let tempData = data;
+    console.log(tempData, data);
+    const target = tempData.findIndex((el) => {
+      return parseInt(el.loket) === parseInt(newData.loket);
+    });
+    if (target !== -1) tempData[target] = newData;
+
+    // data.map((el) => {
+    //   if (el.loket == newData.no_loket) {
+    //     el.name = newData.name;
+    //     el.urutan = newData.urutan;
+    //   }
+    // });
+    setData(
+      tempData.sort((a, b) =>
+        a.loket > b.loket ? 1 : b.loket > a.loket ? -1 : 0
+      )
+    );
     setCalling(null);
   };
 
   const getAntrian = async () => {
     try {
-      const result = await axios.get(`${process.env.REACT_APP_API_URL}/antrian-display`)
+      const result = await axios.get(
+        `${process.env.REACT_APP_API_URL}/antrian-display/`
+      );
       const list = [
         {
           name: "",
@@ -93,52 +114,45 @@ function LihatAntrian() {
           name: "",
           loket: "8",
         },
-      ]
+      ];
       const dataApi = result.data;
 
-        list.map(el => {
-        for (let i=0; i<dataApi.length; i++) {
+      list.map((el) => {
+        for (let i = 0; i < dataApi.length; i++) {
+          if (el.loket === dataApi[i].no_loket) {
+            el.urutan = dataApi[i].urutan;
+            el.name = dataApi[i].name;
+          }
+        }
+      });
 
-            if (el.loket === dataApi[i].no_loket) {
-              el.urutan = dataApi[i].urutan
-              el.name = dataApi[i].name
-             }
-            }
-        });
-
-        setData(list.sort((a,b) => (a.loket > b.loket) ? 1 : ((b.loket > a.loket) ? -1 : 0)))
+      setData(
+        list.sort((a, b) =>
+          a.loket > b.loket ? 1 : b.loket > a.loket ? -1 : 0
+        )
+      );
     } catch (err) {
       console.log("error : ", err);
     }
-  }
+  };
 
   useEffect(() => {
     getAntrian();
     const pusher = new Pusher(process.env.REACT_APP_PUSHER_APP_KEY, {
-      cluster: process.env.REACT_APP_PUSHER_CLUSTER
-    })
+      cluster: process.env.REACT_APP_PUSHER_CLUSTER,
+    });
 
-    const channel = pusher.subscribe('panggiAntrian');
-    channel.bind('panggil_antrian', (antrianData) => {
-      console.log("LOG DATA : ", data);
-      data.map((el) => {
-        if (el.loket == antrianData.no_loket) {
-          el.name = antrianData.name
-          el.urutan = antrianData.urutan
-        }
-      })
+    const channel = pusher.subscribe("panggiAntrian");
+    channel.bind("panggil_antrian", (antrianData) => {
       newAntrianHandler({
-            name: antrianData.name,
-            nik: antrianData.nik,
-            urutan:  antrianData.urutan,
-            loket:  antrianData.no_loket,
-            avatar_url: antrianData.avatar
-      })
-
-      setData(data.sort((a,b) => (a.loket > b.loket) ? 1 : ((b.loket > a.loket) ? -1 : 0)))
-    })
-
-  }, [])
+        name: antrianData.name,
+        nik: antrianData.nik,
+        urutan: antrianData.urutan,
+        loket: antrianData.no_loket,
+        avatar_url: antrianData.avatar,
+      });
+    });
+  }, []);
 
   if (calling) {
     return (
@@ -169,7 +183,7 @@ function LihatAntrian() {
         onClick={() => {
           newAntrianHandler({
             id: 1,
-            name: "Alvira",
+            name: "Contoh Nama",
             nik: "10517094",
             avatar: "1634167153_foto_Alvira.jpg",
             status_terlayani: "BELUM_TERLAYANI",
@@ -179,7 +193,7 @@ function LihatAntrian() {
             created_at: "2021-10-13T23:19:13.000000Z",
             updated_at: "2021-10-13T23:19:13.000000Z",
             avatar_url:
-              "http://localhost:8000/visitor_photos/1634167153_foto_Alvira.jpg",
+              "https://mir-s3-cdn-cf.behance.net/user/276/fdbe8b10587107.5824820573534.jpeg",
           });
         }}
       >
@@ -188,9 +202,11 @@ function LihatAntrian() {
       <div className="grid">
         {data.map((item) => (
           <div className="item">
-            <h3>{item.urutan}</h3>
-            <p className="name">{item.name}</p>
-            <p className="locket">LOKET {item.loket}</p>
+            <div className="wrapper">
+              <h3>{queuePad(item.urutan)}</h3>
+              <p className="name">{item.name}</p>
+              <p className="locket">LOKET {item.loket}</p>
+            </div>
           </div>
         ))}
       </div>
