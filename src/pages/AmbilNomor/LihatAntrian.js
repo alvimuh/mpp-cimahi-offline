@@ -39,6 +39,21 @@ function LihatAntrian() {
             <td>:</td>
             <td>{state.antrian?.name}</td>
           </tr>
+          <tr>
+            <td>No HP</td>
+            <td>:</td>
+            <td>{state.antrian?.phone}</td>
+          </tr>
+          <tr>
+            <td>Instansi yang dituju</td>
+            <td>:</td>
+            <td>{state.antrian?.nama_layanan}</td>
+          </tr>
+          <tr>
+            <td>Layanan terkait</td>
+            <td>:</td>
+            <td>{state.antrian?.nama_sub_layanan}</td>
+          </tr>
         </tbody>
       </table>
       <button

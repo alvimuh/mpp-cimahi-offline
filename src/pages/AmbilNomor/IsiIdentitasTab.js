@@ -4,9 +4,10 @@ import "./style.css";
 import Webcam from "../../components/WebCam/Webcam";
 import axios from "axios";
 import { useAntrian } from "./context";
-
+import { useAlert } from "react-alert";
 function IsiIdentitasTab() {
   const { state, dispatch } = useAntrian();
+  const alert = useAlert();
   const [data, setData] = useState({
     nik: "",
     name: "",
@@ -25,6 +26,7 @@ function IsiIdentitasTab() {
       formdata.append("key", process.env.REACT_APP_API_KEY);
       formdata.append("name", data.name);
       formdata.append("nik", data.nik);
+      formdata.append("phone", data.phone);
       formdata.append("avatar", avaBlob, `foto_${data.name}.jpg`);
       formdata.append("sub_layanan_id", data.sub_layanan_id);
       formdata.append("key", process.env.REACT_APP_API_KEY);
@@ -41,7 +43,12 @@ function IsiIdentitasTab() {
         type: "SET_ANTRIAN",
         data: res.data,
       });
-    } catch (error) {}
+    } catch (error) {
+      alert.show("Oh look, an alert!");
+      dispatch({
+        type: "STOP_LOADING",
+      });
+    }
   };
 
   const inputChangeHandler = (event) => {
@@ -55,7 +62,7 @@ function IsiIdentitasTab() {
     <form onSubmit={submitHandler} autoComplete="off">
       <div className="row">
         <div className="left">
-          <label>Foto</label>
+          <label style={{ display: "block", marginBottom: "8px" }}>Foto</label>
           <Webcam
             onChange={(v) => {
               setData((prev) => ({
@@ -68,13 +75,27 @@ function IsiIdentitasTab() {
         <div className="right form-group">
           <div className="form-group">
             <label>Nomor Induk Kependudukan</label>
-            <input name="nik" value={data.nik} onChange={inputChangeHandler} />
+            <input
+              name="nik"
+              type="number"
+              value={data.nik}
+              onChange={inputChangeHandler}
+            />
           </div>
           <div className="form-group">
             <label>Nama Lengkap</label>
             <input
               name="name"
               value={data.name}
+              onChange={inputChangeHandler}
+            />
+          </div>
+          <div className="form-group">
+            <label>Nomor Telepon</label>
+            <input
+              name="phone"
+              type="number"
+              value={data.phone}
               onChange={inputChangeHandler}
             />
           </div>
