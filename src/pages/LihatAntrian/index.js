@@ -136,22 +136,28 @@ function LihatAntrian() {
     }
   };
 
+  const [pusherChannel, setPusherChannel] = useState(null);
+  useEffect(() => {
+    if (pusherChannel && pusherChannel.bind) {
+      pusherChannel.bind("panggil_antrian", (antrianData) => {
+        newAntrianHandler({
+          name: antrianData.name,
+          nik: antrianData.nik,
+          urutan: antrianData.urutan,
+          loket: antrianData.no_loket,
+          avatar_url: antrianData.avatar,
+        });
+      });
+    }
+  }, [pusherChannel, data]);
+
   useEffect(() => {
     getAntrian();
     const pusher = new Pusher(process.env.REACT_APP_PUSHER_APP_KEY, {
       cluster: process.env.REACT_APP_PUSHER_CLUSTER,
     });
 
-    const channel = pusher.subscribe("panggiAntrian");
-    channel.bind("panggil_antrian", (antrianData) => {
-      newAntrianHandler({
-        name: antrianData.name,
-        nik: antrianData.nik,
-        urutan: antrianData.urutan,
-        loket: antrianData.no_loket,
-        avatar_url: antrianData.avatar,
-      });
-    });
+    setPusherChannel(pusher.subscribe("panggiAntrian"));
   }, []);
 
   if (calling) {
@@ -182,16 +188,11 @@ function LihatAntrian() {
         }}
         onClick={() => {
           newAntrianHandler({
-            id: 1,
             name: "Contoh Nama",
             nik: "10517094",
             avatar: "1634167153_foto_Alvira.jpg",
-            status_terlayani: "BELUM_TERLAYANI",
-            urutan: 1,
-            sub_layanan_id: 1,
-            loket: 1,
-            created_at: "2021-10-13T23:19:13.000000Z",
-            updated_at: "2021-10-13T23:19:13.000000Z",
+            urutan: 2,
+            loket: 3,
             avatar_url:
               "https://mir-s3-cdn-cf.behance.net/user/276/fdbe8b10587107.5824820573534.jpeg",
           });
