@@ -139,6 +139,7 @@ function LihatAntrian() {
   const [pusherChannel, setPusherChannel] = useState(null);
   useEffect(() => {
     if (pusherChannel && pusherChannel.bind) {
+      pusherChannel.unbind("panggil_antrian");
       pusherChannel.bind("panggil_antrian", (antrianData) => {
         newAntrianHandler({
           name: antrianData.name,
