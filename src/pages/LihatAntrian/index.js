@@ -71,7 +71,7 @@ function LihatAntrian() {
   const getAntrian = async () => {
     try {
       const result = await axios.get(
-        `${process.env.REACT_APP_API_URL}/antrian-display/`
+        `${process.env.REACT_APP_API_URL}/antrian-display`
       );
       const list = [
         {
