@@ -120,14 +120,12 @@ function LihatAntrian() {
 
     const channel = pusher.subscribe('panggiAntrian');
     channel.bind('panggil_antrian', (antrianData) => {
-      // {name: "Dion", nik: "321", avatar: "http://localhost:8000/visitor_photos/1634172835_foto_Dion.jpg", urutan: 1, no_loket: "1"}
       data.map((el) => {
         if (el.loket == antrianData.no_loket) {
           el.name = antrianData.name
           el.urutan = antrianData.urutan
         }
       })
-      setData(data);
       newAntrianHandler({
             name: antrianData.name,
             nik: antrianData.nik,
@@ -135,7 +133,8 @@ function LihatAntrian() {
             loket:  antrianData.no_loket,
             avatar_url: antrianData.avatar
       })
-      console.log("Data dari server : ", antrianData);
+
+      setData(data.sort((a,b) => (a.loket > b.loket) ? 1 : ((b.loket > a.loket) ? -1 : 0))
     })
 
   }, [])
