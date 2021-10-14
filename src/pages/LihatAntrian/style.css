@@ -39,30 +39,54 @@
 }
 #calling .left h1 {
   color: white;
+  font-weight: 500;
 }
-#calling .left p {
+#calling .left .number {
   text-align: center;
   transform: scale(1);
-  animation: pulse 0.8s infinite;
+  animation: fadein 0.8s both;
   font-size: 140pt;
   font-weight: 700;
+  color: #ffd217;
+}
+#calling .left .locket {
+  text-align: center;
+  color: black;
+  animation: fadein 0.8s both;
+  font-size: 48pt;
+  font-weight: 700;
+  background: #ffd217;
+  line-height: 2;
+}
+#calling .right {
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: row;
+}
+#calling .right .box {
+  background: white;
+  border-radius: 8px;
+  margin: auto;
+  overflow: hidden;
+}
+#calling .right h1 {
+  color: #061729;
   line-height: 1;
 }
-@keyframes pulse {
+#calling .right p {
+  color: #283746;
+  line-height: 2;
+}
+@keyframes fadein {
   0% {
-    transform: scale(0.9);
-    color: #fdad00;
-  }
-
-  70% {
-    transform: scale(1);
-    text-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
-    color: #ffd217;
+    transform: scale(1.5);
+    /* color: #fdad00; */
   }
 
   100% {
-    transform: scale(0.9);
+    transform: scale(1);
     text-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-    color: #fdad00;
+    /* color: #ffd217; */
   }
 }
