@@ -46,6 +46,35 @@ main {
 .content {
   padding: 34px;
 }
+.v-center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+}
+.menu {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  list-style: none;
+  padding: 12px;
+  height: 50%;
+  align-self: center;
+}
+.menu-item {
+  background: white;
+  text-decoration: none;
+  text-align: center;
+  color: #34495e;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 8px;
+}
+.menu-item div {
+  width: 100%;
+}
 .form-group {
   margin-bottom: 24px;
 }
@@ -67,32 +96,7 @@ main {
   outline-color: #547a9f;
   border: 2px solid #dee0e2;
 }
-.steps-line {
-  list-style: none;
-  display: flex;
-  background: #f1f4f7;
-}
 
-.steps-line li {
-  flex: 1;
-  padding: 12px 18px;
-  opacity: 0.4;
-}
-.steps-line li.active {
-  opacity: 1;
-}
-.steps-line li {
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-}
-.steps-line li span {
-  color: #547a9f;
-  font-size: 20pt;
-  font-weight: 300;
-  line-height: 1;
-  margin-left: 8px;
-}
 button {
   cursor: pointer;
   border: 0;
@@ -114,4 +118,74 @@ button.cta {
   font-weight: 400;
   font-size: 18pt;
   text-transform: uppercase;
+}
+
+.container {
+  padding: 12px 0;
+}
+.select {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  list-style: none;
+  padding: 12px;
+}
+.select .item {
+  display: block;
+  border: 2px solid #dee0e2;
+  border-radius: 8px;
+  box-shadow: 0 4px 3px rgba(0, 0, 0, 0.07);
+  cursor: pointer;
+  padding: 6px 0;
+  background: #fff;
+}
+.select .item.active {
+  border: 2px solid #547a9f;
+}
+.select img {
+  height: 100px;
+  width: auto;
+  max-width: 100%;
+  margin: 24px;
+  margin: auto;
+  display: block;
+  margin-bottom: 12px;
+}
+.select h3 {
+  font-size: 12pt;
+  margin: 0 24px;
+  text-align: center;
+  color: #283746;
+}
+.row {
+  display: flex;
+}
+.row .right {
+  width: 65%;
+}
+.row .left {
+  margin-right: 28px;
+  width: 35%;
+}
+.result h1,
+.result h3,
+.result h4 {
+  text-align: center;
+  color: #283746;
+}
+.result h1 {
+  font-size: 86pt;
+  font-weight: 500;
+}
+.result h3 {
+  font-size: 34pt;
+  margin-bottom: 24px;
+}
+.result table {
+  margin: auto;
+  color: #283746;
+  margin: 24px auto;
+}
+.result td:nth-child(2) {
+  padding: 0 20px;
 }

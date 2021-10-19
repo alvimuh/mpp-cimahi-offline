@@ -1,0 +1,26 @@
+.steps-line {
+  list-style: none;
+  display: flex;
+  background: #f1f4f7;
+}
+
+.steps-line li {
+  flex: 1;
+  padding: 12px 18px;
+  opacity: 0.4;
+}
+.steps-line li.active {
+  opacity: 1;
+}
+.steps-line li {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+.steps-line li span {
+  color: #547a9f;
+  font-size: 20pt;
+  font-weight: 300;
+  line-height: 1;
+  margin-left: 8px;
+}

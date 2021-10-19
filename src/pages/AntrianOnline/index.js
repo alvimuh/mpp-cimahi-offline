@@ -42,11 +42,9 @@ function StepSwitch() {
     state: { step },
   } = useAntrian();
 
-  if (step === 0 || step === 1) {
-    return <PilihLayananTab />;
-  } else if (step === 2) {
+  if (step === 0) {
     return <IsiIdentitasTab />;
-  } else if (step === 3 || step === 4) {
+  } else if (step === 2) {
     return <LihatAntrian />;
   } else return <></>;
 }
