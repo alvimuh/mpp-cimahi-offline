@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import "./style.css";
 import Skeleton from "react-loading-skeleton";
 import axios from "axios";
 import Carousel from "@brainhubeu/react-carousel";
@@ -26,10 +25,17 @@ function PilihLayananTab(props) {
 
   const fetchInstansi = async () => {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_API_URL}/dasbor`);
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL}/internal/kuota/offline`,
+        {
+          params: {
+            key: process.env.REACT_APP_API_KEY,
+          },
+        }
+      );
       dispatch({
         type: "SET_INSTANSI",
-        instansi: res.data.layanan,
+        instansi: res.data,
       });
     } catch (error) {}
   };
@@ -54,26 +60,35 @@ function PilihLayananTab(props) {
         <Carousel plugins={["arrows"]}>
           {groupByN(8, state.instansi).map((group, indexGroup) => (
             <ul className="select" key={indexGroup}>
-              {group.map((item, indexItem) => (
-                <li
-                  key={indexItem}
-                  onClick={() =>
-                    dispatch({
-                      type: "SWITCH_INSTANSI",
-                      id: item.id,
-                    })
-                  }
-                  className={`item ${
-                    state.instansiSelected === item.id && "active"
-                  }`}
-                >
-                  <img
-                    src={item.gambar_layanan_url}
-                    alt={"Logo " + item.nama_layanan}
-                  />
-                  <h3>{item.nama_layanan}</h3>
-                </li>
-              ))}
+              {group.map((item, indexItem) => {
+                let classess = ["item"];
+                if (state.instansiSelected === item.id) {
+                  classess.push("active");
+                }
+                if (item.kuota < 1) {
+                  classess.push("disabled");
+                }
+                return (
+                  <li
+                    key={indexItem}
+                    onClick={() => {
+                      if (item.kuota > 0) {
+                        dispatch({
+                          type: "SWITCH_INSTANSI",
+                          id: item.id,
+                        });
+                      }
+                    }}
+                    className={classess.join(" ")}
+                  >
+                    <img
+                      src={item.gambar_layanan_url}
+                      alt={"Logo " + item.nama_layanan}
+                    />
+                    <h3>{item.nama_layanan}</h3>
+                  </li>
+                );
+              })}
             </ul>
           ))}
         </Carousel>
