@@ -3,12 +3,12 @@ import React from "react";
 import "./style.css";
 
 import { AntrianProvider, useAntrian } from "./context";
-import PilihLayananTab from "./PilihLayananTab";
-import IsiIdentitasTab from "./IsiIdentitasTab";
+import FotoTab from "./FotoTab";
+import ScanTab from "./ScanTab";
 import LihatAntrian from "./LihatAntrian";
 
 import identity_icon from "../../assets/icons/icons8-membership-card-96.png";
-import select_icon from "../../assets/icons/icons8-check-all-96.png";
+import qr_icon from "../../assets/icons/icons8-barcode-scanner-96.png";
 import waiting_icon from "../../assets/icons/icons8-time-card-96.png";
 import StepIndicator from "../../components/StepIndicator";
 
@@ -19,19 +19,19 @@ function Header() {
 
   const indicators = [
     {
-      label: "Pilih tenant dan layanan",
-      icon: identity_icon,
-      active: step === 0 || step === 1,
+      label: "Scan QR Code",
+      icon: qr_icon,
+      active: step === 0,
     },
     {
-      label: "Isi Identitas",
-      icon: select_icon,
-      active: step === 2,
+      label: "Ambil Foto",
+      icon: identity_icon,
+      active: step === 1,
     },
     {
       label: "Ambil Nomor Antrian",
       icon: waiting_icon,
-      active: step === 3 || step === 4,
+      active: step === 2 || step === 3,
     },
   ];
   return <StepIndicator lists={indicators} />;
@@ -43,8 +43,10 @@ function StepSwitch() {
   } = useAntrian();
 
   if (step === 0) {
-    return <IsiIdentitasTab />;
-  } else if (step === 2) {
+    return <ScanTab />;
+  } else if (step === 1) {
+    return <FotoTab />;
+  } else if (step === 2 || step === 3) {
     return <LihatAntrian />;
   } else return <></>;
 }

@@ -6,7 +6,8 @@ import { useAntrian } from "./context";
 
 function LihatAntrian() {
   const { state, dispatch } = useAntrian();
-  if (state.step === 4) {
+  console.log(state);
+  if (state.step === 3) {
     return (
       <div className="result">
         <h3>Berhasil!</h3>
@@ -62,7 +63,7 @@ function LihatAntrian() {
         onClick={() => {
           dispatch({
             type: "SWITCH_STEP",
-            to: 4,
+            to: 3,
           });
         }}
       >

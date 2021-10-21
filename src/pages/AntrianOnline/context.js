@@ -10,6 +10,7 @@ const initialState = {
   layanan: [],
   layananSelected: null,
   antrian: null,
+  booking: null,
 };
 const Context = createContext();
 
@@ -68,11 +69,18 @@ function reducer(state, action) {
         step: 1,
       };
     }
+    case "SET_BOOKING": {
+      return {
+        ...state,
+        booking: action.data,
+        step: 1,
+      };
+    }
     case "SET_ANTRIAN": {
       return {
         ...state,
         antrian: action.data,
-        step: 3,
+        step: 2,
       };
     }
     case "SWITCH_INSTANSI": {

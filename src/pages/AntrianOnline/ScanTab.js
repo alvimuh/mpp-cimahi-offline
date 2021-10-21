@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 // import PropTypes from "prop-types";
 import "./style.css";
 import QrReader from "react-qr-reader";
@@ -11,31 +11,22 @@ function IsiIdentitasTab() {
   const alert = useAlert();
   const [data, setData] = useState({
     kode_booking: "",
-    avatar: "",
   });
 
   const submitHandler = async (e) => {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     try {
       dispatch({
         type: "LOADING",
       });
-      let formdata = new FormData();
-      const avaBlob = await (await fetch(data.avatar)).blob();
-      formdata.append("key", process.env.REACT_APP_API_KEY);
-      formdata.append("kode_booking", data.kode_booking);
-      formdata.append("avatar", avaBlob, `foto_${data.name}.jpg`);
       const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}/internal/antrian`,
-        formdata,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        `${process.env.REACT_APP_API_URL}/internal/booking/cek`,
+        { ...data, key: process.env.REACT_APP_API_KEY }
       );
       dispatch({
-        type: "SET_ANTRIAN",
+        type: "SET_BOOKING",
         data: res.data,
       });
     } catch (error) {
@@ -53,7 +44,6 @@ function IsiIdentitasTab() {
     }));
   };
   useEffect(() => {
-    console.log(data.kode_booking);
     if (data.kode_booking) {
       dispatch({
         type: "ENABLE_CTA",
@@ -64,6 +54,8 @@ function IsiIdentitasTab() {
       });
     }
   }, [data.kode_booking]);
+
+  const ctaRef = useRef(null);
 
   return (
     <form onSubmit={submitHandler} autoComplete="off">
@@ -92,7 +84,12 @@ function IsiIdentitasTab() {
               onChange={inputChangeHandler}
             />
           </div>
-          <button type="submit" className="cta" disabled={state.ctaDisabled}>
+          <button
+            type="submit"
+            className="cta"
+            disabled={state.ctaDisabled}
+            ref={ctaRef}
+          >
             Lanjutkan
           </button>
         </div>
