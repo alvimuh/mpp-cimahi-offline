@@ -22,7 +22,7 @@ function App() {
         <Route path="/antrian-online">
           <AntrianOnline />
         </Route>
-        <Route path="/">
+        <Route path="/" exact>
           <Beranda />
         </Route>
       </Switch>

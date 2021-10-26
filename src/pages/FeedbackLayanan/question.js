@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import IconRating1 from "../../assets/icons/icons8-disappointed-96.png";
 import IconRating2 from "../../assets/icons/icons8-boring-96.png";
 import IconRating3 from "../../assets/icons/icons8-happy-96.png";
 import IconRating4 from "../../assets/icons/icons8-smiling-96.png";
 import IconRating5 from "../../assets/icons/icons8-in-love-96.png";
-import { useEffect } from "react/cjs/react.development";
 
 function Question({ question, rateChanged, loading, selected }) {
   const [contentClass, setContentClass] = useState("");
