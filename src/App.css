@@ -216,13 +216,30 @@ button.cta {
 
 .title {
   text-align: center;
-  color: #283746;
+  color: #3b536c;
 }
 .question {
   text-align: center;
   font-weight: 400;
-  margin-bottom: 34px;
+  margin: 34px 0;
   color: #283746;
+  font-size: 40pt;
+}
+.done {
+  margin: 74px 0;
+}
+.done img {
+  display: block;
+  margin: auto;
+}
+.done h2 {
+  text-align: center;
+  font-weight: 400;
+  color: #283746;
+  font-size: 40pt;
+  max-width: 800px;
+  display: block;
+  margin: auto;
 }
 
 @keyframes fadein {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import StepIndicator from "../../components/StepIndicator";
+import iconChecked from "../../assets/icons/icons8-checked-96.png";
 import Question from "./question";
 import axios from "axios";
 
@@ -43,14 +43,10 @@ function FeedbackLayanan() {
           <div className="content">
             <h1 className="title">Feedback Layanan</h1>
             {data.number > 2 ? (
-              <h2
-                className="question"
-                style={{
-                  margin: "80px 0",
-                }}
-              >
-                Feedback Anda telah tersimpan. Terima kasih!
-              </h2>
+              <div className="done">
+                <img src={iconChecked} alt="checked" />
+                <h2>Feedback Anda telah tersimpan. Terima kasih!</h2>
+              </div>
             ) : (
               <Question
                 question={questions[data.number]}
