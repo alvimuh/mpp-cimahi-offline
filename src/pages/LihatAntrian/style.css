@@ -89,15 +89,3 @@
   color: #283746;
   line-height: 2;
 }
-@keyframes fadein {
-  0% {
-    transform: scale(1.5);
-    /* color: #fdad00; */
-  }
-
-  100% {
-    transform: scale(1);
-    text-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-    /* color: #ffd217; */
-  }
-}
