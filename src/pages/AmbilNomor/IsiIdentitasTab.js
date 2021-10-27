@@ -75,6 +75,7 @@ function IsiIdentitasTab() {
           <div className="form-group">
             <label>Nomor Induk Kependudukan</label>
             <input
+              type="text"
               name="nik"
               type="number"
               value={data.nik}
@@ -84,6 +85,7 @@ function IsiIdentitasTab() {
           <div className="form-group">
             <label>Nama Lengkap</label>
             <input
+              type="text"
               name="name"
               value={data.name}
               onChange={inputChangeHandler}
@@ -92,6 +94,7 @@ function IsiIdentitasTab() {
           <div className="form-group">
             <label>Nomor Telepon</label>
             <input
+              type="text"
               name="phone"
               type="number"
               value={data.phone}

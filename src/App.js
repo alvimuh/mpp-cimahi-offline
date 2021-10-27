@@ -5,12 +5,16 @@ import LihatAntrian from "./pages/LihatAntrian";
 import Beranda from "./pages/Beranda";
 import AntrianOnline from "./pages/AntrianOnline";
 import FeedbackLayanan from "./pages/FeedbackLayanan";
+import Survei from "./pages/Survei";
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/feedback-layanan">
+        <Route path="/survei">
+          <Survei />
+        </Route>
+        <Route path="/feedback">
           <FeedbackLayanan />
         </Route>
         <Route path="/lihat-antrian">

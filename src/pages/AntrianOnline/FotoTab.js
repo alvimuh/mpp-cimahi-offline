@@ -85,6 +85,7 @@ function FotoTab() {
           <div className="form-group">
             <label>Nama Lengkap</label>
             <input
+              type="text"
               name="name"
               value={state.booking?.user?.name}
               onChange={inputChangeHandler}

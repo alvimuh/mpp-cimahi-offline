@@ -10,7 +10,7 @@ function IsiIdentitasTab() {
   const { state, dispatch } = useAntrian();
   const alert = useAlert();
   const [data, setData] = useState({
-    kode_booking: "",
+    phone: "",
   });
 
   const submitHandler = async (e) => {
@@ -22,12 +22,12 @@ function IsiIdentitasTab() {
         type: "LOADING",
       });
       const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}/internal/booking/cek`,
+        `${process.env.REACT_APP_API_URL}/internal/check-phone-number`,
         { ...data, key: process.env.REACT_APP_API_KEY }
       );
       dispatch({
         type: "SET_BOOKING",
-        data: res.data,
+        data: res.data.data,
       });
     } catch (error) {
       alert.show("Oh look, an alert!");
@@ -44,7 +44,7 @@ function IsiIdentitasTab() {
     }));
   };
   useEffect(() => {
-    if (data.kode_booking) {
+    if (data.phone) {
       dispatch({
         type: "ENABLE_CTA",
       });
@@ -53,48 +53,29 @@ function IsiIdentitasTab() {
         type: "DISABLE_CTA",
       });
     }
-  }, [data.kode_booking]);
+  }, [data.phone]);
 
   const ctaRef = useRef(null);
 
   return (
     <form onSubmit={submitHandler} autoComplete="off">
-      <div className="row">
-        <div className="left">
-          <label style={{ display: "block", marginBottom: "8px" }}>Foto</label>
-          <QrReader
-            delay={300}
-            onScan={(r) => {
-              if (r && data.kode_booking !== r) {
-                new Audio(process.env.PUBLIC_URL + "/sound/ping.mp3").play();
-                setData((prev) => ({
-                  ...prev,
-                  kode_booking: r,
-                }));
-              }
-            }}
-          />
-        </div>
-        <div className="right form-group">
-          <div className="form-group">
-            <label>Kode Booking</label>
-            <input
-              type="text"
-              name="kode_booking"
-              value={data.kode_booking}
-              onChange={inputChangeHandler}
-            />
-          </div>
-          <button
-            type="submit"
-            className="cta"
-            disabled={state.ctaDisabled}
-            ref={ctaRef}
-          >
-            Lanjutkan
-          </button>
-        </div>
+      <div className="form-group">
+        <label>Nomor Telepon</label>
+        <input
+          type="text"
+          name="phone"
+          value={data.phone}
+          onChange={inputChangeHandler}
+        />
       </div>
+      <button
+        type="submit"
+        className="cta"
+        disabled={state.ctaDisabled}
+        ref={ctaRef}
+      >
+        Lanjutkan
+      </button>
     </form>
   );
 }

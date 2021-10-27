@@ -24,12 +24,12 @@ function Beranda() {
       icon: IconOffline,
     },
     {
-      link: "/feedback-layanan",
+      link: "/feedback",
       label: "Feedback Layanan",
       icon: IconStar,
     },
     {
-      link: "/survei-kepuasan",
+      link: "/survei",
       label: "Survei Kepuasan",
       icon: IconAsk,
     },
