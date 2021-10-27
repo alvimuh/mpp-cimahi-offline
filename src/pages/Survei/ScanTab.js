@@ -62,7 +62,7 @@ function IsiIdentitasTab() {
       <div className="form-group">
         <label>Nomor Telepon</label>
         <input
-          type="text"
+          type="number"
           name="phone"
           value={data.phone}
           onChange={inputChangeHandler}

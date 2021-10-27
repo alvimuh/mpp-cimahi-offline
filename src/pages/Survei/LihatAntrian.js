@@ -5,6 +5,7 @@ import { useAntrian } from "./context";
 import axios from "axios";
 import { useForm, Controller } from "react-hook-form";
 import iconChecked from "../../assets/icons/icons8-checked-96.png";
+import Skeleton from "react-loading-skeleton";
 
 function LihatAntrian() {
   const { state, dispatch } = useAntrian();
@@ -84,6 +85,25 @@ function LihatAntrian() {
   return (
     <div className="result">
       <form onSubmit={handleSubmit(submitData)}>
+        {loading && (
+          <div>
+            <div style={{ marginBottom: 20 }}>
+              <Skeleton height={60} />
+              <br />
+              <Skeleton height={60} width={60} style={{ marginRight: 10 }} />
+              <Skeleton height={60} width="40%" />
+              <br />
+              <Skeleton height={60} width={60} style={{ marginRight: 10 }} />
+              <Skeleton height={60} width="40%" />
+              <br />
+              <Skeleton height={60} width={60} style={{ marginRight: 10 }} />
+              <Skeleton height={60} width="40%" />
+              <br />
+              <Skeleton height={60} width={60} style={{ marginRight: 10 }} />
+              <Skeleton height={60} width="40%" />
+            </div>
+          </div>
+        )}
         {questions.map((item, index) => (
           <Controller
             control={control}

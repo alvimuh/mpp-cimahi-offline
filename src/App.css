@@ -204,6 +204,15 @@ button.cta {
   margin-right: 28px;
   width: 35%;
 }
+.row .main {
+  width: 65%;
+}
+.row .side {
+  width: 35%;
+}
+.row .space {
+  margin-right: 28px;
+}
 .result h1,
 .result h3,
 .result h4 {

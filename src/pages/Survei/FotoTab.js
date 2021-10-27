@@ -31,35 +31,61 @@ function FotoTab() {
 
   return (
     <form onSubmit={submitHandler} autoComplete="off">
-      <div className="form-group">
-        <label>Nomor Telepon</label>
-        <input
-          name="phone"
-          type="number"
-          value={state.booking?.phone}
-          onChange={inputChangeHandler}
-          disabled
-        />
-      </div>
-      <div className="form-group">
-        <label>Nomor Induk Kependudukan</label>
-        <input
-          name="nik"
-          type="number"
-          value={state.booking?.nik}
-          onChange={inputChangeHandler}
-          disabled
-        />
-      </div>
-      <div className="form-group">
-        <label>Nama Lengkap</label>
-        <input
-          name="name"
-          type="text"
-          value={state.booking?.name}
-          onChange={inputChangeHandler}
-          disabled
-        />
+      <div className="row">
+        <div className="main space">
+          <div className="form-group">
+            <label>Nama Lengkap</label>
+            <input
+              name="name"
+              type="text"
+              value={state.booking?.name}
+              onChange={inputChangeHandler}
+              disabled
+            />
+          </div>
+          <div className="form-group">
+            <label>Nomor Telepon</label>
+            <input
+              name="phone"
+              type="number"
+              value={state.booking?.phone}
+              onChange={inputChangeHandler}
+              disabled
+            />
+          </div>
+          <div className="form-group">
+            <label>Nomor Induk Kependudukan</label>
+            <input
+              name="nik"
+              type="number"
+              value={state.booking?.nik}
+              onChange={inputChangeHandler}
+              disabled
+            />
+          </div>
+        </div>
+        <div className="side">
+          <div className="form-group">
+            <label>Layanan yang dituju</label>
+            <input
+              name="name"
+              type="text"
+              value={state.booking?.nama_sub_layanan}
+              onChange={inputChangeHandler}
+              disabled
+            />
+          </div>
+          <div className="form-group">
+            <label>Instansi Terkait</label>
+            <input
+              name="name"
+              type="text"
+              value={state.booking?.nama_layanan}
+              onChange={inputChangeHandler}
+              disabled
+            />
+          </div>
+        </div>
       </div>
       <button type="submit" className="cta" disabled={state.ctaDisabled}>
         Lanjutkan
