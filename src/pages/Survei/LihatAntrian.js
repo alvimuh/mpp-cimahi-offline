@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import PropTypes from "prop-types";
 import "./style.css";
 import { useAntrian } from "./context";
-import { useEffect } from "react/cjs/react.development";
 import axios from "axios";
 import { useForm, Controller } from "react-hook-form";
 import iconChecked from "../../assets/icons/icons8-checked-96.png";
