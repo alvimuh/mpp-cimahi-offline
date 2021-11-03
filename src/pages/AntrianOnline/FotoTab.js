@@ -24,7 +24,7 @@ function FotoTab() {
       let formdata = new FormData();
       const avaBlob = await (await fetch(data.avatar)).blob();
       formdata.append("key", process.env.REACT_APP_API_KEY);
-      formdata.append("no_booking", state.booking.no_booking);
+      formdata.append("kode_booking", state.booking.kode_booking);
       formdata.append("avatar", avaBlob, `foto_${data.name}.jpg`);
       const res = await axios.post(
         `${process.env.REACT_APP_API_URL}/internal/booking/tukar`,
@@ -77,7 +77,7 @@ function FotoTab() {
             <input
               name="nik"
               type="number"
-              value={state.booking?.user?.nik}
+              value={state.booking?.pelayanan?.user?.nik}
               onChange={inputChangeHandler}
               disabled
             />
@@ -87,7 +87,7 @@ function FotoTab() {
             <input
               type="text"
               name="name"
-              value={state.booking?.user?.name}
+              value={state.booking?.pelayanan?.user?.name}
               onChange={inputChangeHandler}
               disabled
             />
@@ -97,7 +97,7 @@ function FotoTab() {
             <input
               name="phone"
               type="number"
-              value={state.booking?.user?.phone}
+              value={state.booking?.pelayanan?.user?.phone}
               onChange={inputChangeHandler}
               disabled
             />

@@ -36,30 +36,35 @@ function Question({ question, rateChanged, loading, selected }) {
           onClick={() => rateChanged(1)}
         >
           <img src={IconRating1} alt="1" />
+          <h3>SANGAT KURANG</h3>
         </button>
         <button
           className={`item ${selected === 2 && "active"}`}
           onClick={() => rateChanged(2)}
         >
           <img src={IconRating2} alt="2" />
+          <h3>KURANG BAIK</h3>
         </button>
         <button
           className={`item ${selected === 3 && "active"}`}
           onClick={() => rateChanged(3)}
         >
           <img src={IconRating3} alt="3" />
+          <h3>CUKUP BAIK</h3>
         </button>
         <button
           className={`item ${selected === 4 && "active"}`}
           onClick={() => rateChanged(4)}
         >
           <img src={IconRating4} alt="4" />
+          <h3>BAIK</h3>
         </button>
         <button
           className={`item ${selected === 5 && "active"}`}
           onClick={() => rateChanged(5)}
         >
           <img src={IconRating5} alt="5" />
+          <h3>SANGAT BAIK</h3>
         </button>
       </div>
     </div>
