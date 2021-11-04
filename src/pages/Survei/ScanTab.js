@@ -10,7 +10,7 @@ function IsiIdentitasTab() {
   const { state, dispatch } = useAntrian();
   const alert = useAlert();
   const [data, setData] = useState({
-    phone: "",
+    kode_pelayanan: "",
   });
 
   const submitHandler = async (e) => {
@@ -27,7 +27,7 @@ function IsiIdentitasTab() {
       );
       dispatch({
         type: "SET_BOOKING",
-        data: res.data.data,
+        data: res.data,
       });
     } catch (error) {
       alert.show("Oh look, an alert!");
@@ -44,7 +44,7 @@ function IsiIdentitasTab() {
     }));
   };
   useEffect(() => {
-    if (data.phone) {
+    if (data.kode_pelayanan) {
       dispatch({
         type: "ENABLE_CTA",
       });
@@ -53,19 +53,22 @@ function IsiIdentitasTab() {
         type: "DISABLE_CTA",
       });
     }
-  }, [data.phone]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data.kode_pelayanan]);
 
   const ctaRef = useRef(null);
 
   return (
     <form onSubmit={submitHandler} autoComplete="off">
-      <div className="form-group">
-        <label>Nomor Telepon</label>
+      <div className="form-group" style={{ margin: "40px 0" }}>
+        <label>Cari data</label>
         <input
-          type="number"
-          name="phone"
-          value={data.phone}
+          style={{ marginTop: "10px" }}
+          type="text"
+          name="kode_pelayanan"
+          value={data.kode_pelayanan}
           onChange={inputChangeHandler}
+          placeholder="Masukkan ID Permohonan Masyarakat"
         />
       </div>
       <button

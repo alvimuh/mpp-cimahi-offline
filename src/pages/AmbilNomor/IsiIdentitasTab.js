@@ -11,6 +11,7 @@ function IsiIdentitasTab() {
     nik: "",
     name: "",
     avatar: "",
+    phone: "",
     sub_layanan_id: state.layananSelected,
   });
 

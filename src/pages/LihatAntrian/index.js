@@ -181,26 +181,6 @@ function LihatAntrian() {
   }
   return (
     <main>
-      <button
-        style={{
-          position: "absolute",
-          bottom: 25,
-          left: 25,
-        }}
-        onClick={() => {
-          newAntrianHandler({
-            name: "Contoh Nama",
-            nik: "10517094",
-            avatar: "1634167153_foto_Alvira.jpg",
-            urutan: 2,
-            loket: 3,
-            avatar_url:
-              "https://mir-s3-cdn-cf.behance.net/user/276/fdbe8b10587107.5824820573534.jpeg",
-          });
-        }}
-      >
-        Simulasi
-      </button>
       <div className="grid">
         {data.map((item) => (
           <div className="item">

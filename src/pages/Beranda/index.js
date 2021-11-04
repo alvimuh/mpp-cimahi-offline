@@ -24,14 +24,14 @@ function Beranda() {
       icon: IconOffline,
     },
     {
+      link: "/survei-dan-ambil-nomor",
+      label: "Antrian Offline & Pengisian Survei",
+      icon: IconAsk,
+    },
+    {
       link: "/feedback",
       label: "Feedback Layanan",
       icon: IconStar,
-    },
-    {
-      link: "/survei",
-      label: "Survei Kepuasan",
-      icon: IconAsk,
     },
   ];
   return (

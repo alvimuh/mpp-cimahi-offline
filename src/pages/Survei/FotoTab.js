@@ -16,10 +16,39 @@ function FotoTab() {
   });
 
   const submitHandler = async (e) => {
-    dispatch({
-      type: "SWITCH_STEP",
-      to: 2,
-    });
+    e.preventDefault();
+    try {
+      dispatch({
+        type: "LOADING",
+      });
+      let formdata = new FormData();
+      const avaBlob = await (await fetch(data.avatar)).blob();
+      formdata.append("key", process.env.REACT_APP_API_KEY);
+      formdata.append("name", state.booking.detail_identitas.name);
+      formdata.append("nik", state.booking.detail_identitas.nik);
+      formdata.append("phone", state.booking.detail_identitas.phone);
+      formdata.append("avatar", avaBlob, `foto_${data.name}.jpg`);
+      formdata.append("sub_layanan_id", state.booking.sub_layanan_id);
+      formdata.append("key", process.env.REACT_APP_API_KEY);
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL}/internal/antrian`,
+        formdata,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      dispatch({
+        type: "SET_ANTRIAN",
+        data: res.data,
+      });
+    } catch (error) {
+      alert.show("Oh look, an alert!");
+      dispatch({
+        type: "STOP_LOADING",
+      });
+    }
   };
 
   const inputChangeHandler = (event) => {
@@ -32,23 +61,35 @@ function FotoTab() {
   return (
     <form onSubmit={submitHandler} autoComplete="off">
       <div className="row">
-        <div className="main space">
+        <div className="left">
+          <label style={{ display: "block", marginBottom: "8px" }}>Foto</label>
+          <Webcam
+            onChange={(v) => {
+              setData((prev) => ({
+                ...prev,
+                avatar: v,
+              }));
+              dispatch({
+                type: "ENABLE_CTA",
+              });
+            }}
+          />
+        </div>
+        <div className="right form-group">
           <div className="form-group">
-            <label>Nama Lengkap</label>
+            <label>Layanan yang Dituju</label>
             <input
-              name="name"
               type="text"
-              value={state.booking?.name}
+              value={state.booking?.detail_sub_layanan?.nama_sub_layanan}
               onChange={inputChangeHandler}
               disabled
             />
           </div>
           <div className="form-group">
-            <label>Nomor Telepon</label>
+            <label>Instansi terkait</label>
             <input
-              name="phone"
-              type="number"
-              value={state.booking?.phone}
+              type="text"
+              value={state.booking?.detail_layanan?.nama_layanan}
               onChange={inputChangeHandler}
               disabled
             />
@@ -58,38 +99,36 @@ function FotoTab() {
             <input
               name="nik"
               type="number"
-              value={state.booking?.nik}
-              onChange={inputChangeHandler}
-              disabled
-            />
-          </div>
-        </div>
-        <div className="side">
-          <div className="form-group">
-            <label>Layanan yang dituju</label>
-            <input
-              name="name"
-              type="text"
-              value={state.booking?.nama_sub_layanan}
+              value={state.booking?.detail_identitas?.nik}
               onChange={inputChangeHandler}
               disabled
             />
           </div>
           <div className="form-group">
-            <label>Instansi Terkait</label>
+            <label>Nama Lengkap</label>
             <input
-              name="name"
               type="text"
-              value={state.booking?.nama_layanan}
+              name="name"
+              value={state.booking?.detail_identitas?.name}
               onChange={inputChangeHandler}
               disabled
             />
           </div>
+          <div className="form-group">
+            <label>Nomor Telepon</label>
+            <input
+              name="phone"
+              type="number"
+              value={state.booking?.detail_identitas?.phone}
+              onChange={inputChangeHandler}
+              disabled
+            />
+          </div>
+          <button type="submit" className="cta" disabled={state.ctaDisabled}>
+            Lanjutkan
+          </button>
         </div>
       </div>
-      <button type="submit" className="cta" disabled={state.ctaDisabled}>
-        Lanjutkan
-      </button>
     </form>
   );
 }

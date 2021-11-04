@@ -11,7 +11,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/survei">
+        <Route path="/survei-dan-ambil-nomor">
           <Survei />
         </Route>
         <Route path="/feedback">

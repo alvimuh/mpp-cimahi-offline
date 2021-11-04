@@ -5,12 +5,13 @@ import "./style.css";
 import { AntrianProvider, useAntrian } from "./context";
 import FotoTab from "./FotoTab";
 import ScanTab from "./ScanTab";
-import LihatAntrian from "./LihatAntrian";
+import IsiSurvei from "./IsiSurvei";
 
 import identity_icon from "../../assets/icons/icons8-membership-card-96.png";
-import qr_icon from "../../assets/icons/icons8-ringing-phone-96.png";
-import waiting_icon from "../../assets/icons/icons8-ask-question-96.png";
+import waiting_icon from "../../assets/icons/icons8-time-card-96.png";
+import ask_icon from "../../assets/icons/icons8-ask-question-96.png";
 import StepIndicator from "../../components/StepIndicator";
+import LihatAntrian from "./LihatAntrian";
 
 function Header() {
   const {
@@ -19,8 +20,8 @@ function Header() {
 
   const indicators = [
     {
-      label: "Masukan Nomor Telepon",
-      icon: qr_icon,
+      label: "Cari Data",
+      icon: identity_icon,
       active: step === 0,
     },
     {
@@ -30,8 +31,13 @@ function Header() {
     },
     {
       label: "Isi Survei",
+      icon: ask_icon,
+      active: step === 2,
+    },
+    {
+      label: "Ambil Nomor Antrian",
       icon: waiting_icon,
-      active: step === 2 || step === 3,
+      active: step === 3 || step === 4,
     },
   ];
   return <StepIndicator lists={indicators} />;
@@ -46,7 +52,9 @@ function StepSwitch() {
     return <ScanTab />;
   } else if (step === 1) {
     return <FotoTab />;
-  } else if (step === 2 || step === 3) {
+  } else if (step === 2) {
+    return <IsiSurvei />;
+  } else if (step === 3 || step === 4) {
     return <LihatAntrian />;
   } else return <></>;
 }
