@@ -12,6 +12,7 @@ function FotoTab() {
     nik: "",
     name: "",
     avatar: "",
+    email: "",
     sub_layanan_id: state.layananSelected,
   });
 
@@ -27,6 +28,7 @@ function FotoTab() {
       formdata.append("name", state.booking.detail_identitas.name);
       formdata.append("nik", state.booking.detail_identitas.nik);
       formdata.append("phone", state.booking.detail_identitas.phone);
+      formdata.append("email", state.booking.detail_identitas.email);
       formdata.append("avatar", avaBlob, `foto_${data.name}.jpg`);
       formdata.append("sub_layanan_id", state.booking.sub_layanan_id);
       formdata.append("key", process.env.REACT_APP_API_KEY);
@@ -120,6 +122,16 @@ function FotoTab() {
               name="phone"
               type="number"
               value={state.booking?.detail_identitas?.phone}
+              onChange={inputChangeHandler}
+              disabled
+            />
+          </div>
+          <div className="form-group">
+            <label>Alamat Email</label>
+            <input
+              name="email"
+              type="email"
+              value={state.booking?.detail_identitas?.email}
               onChange={inputChangeHandler}
               disabled
             />
