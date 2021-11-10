@@ -95,6 +95,7 @@ input[type="radio"] {
   margin-bottom: 24px;
 }
 .form-group input[type="text"],
+.form-group input[type="email"],
 .form-group input[type="number"],
 .form-group textarea {
   display: block;

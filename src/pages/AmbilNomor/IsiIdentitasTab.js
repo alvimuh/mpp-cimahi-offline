@@ -12,6 +12,7 @@ function IsiIdentitasTab() {
     name: "",
     avatar: "",
     phone: "",
+    email: "",
     sub_layanan_id: state.layananSelected,
   });
 
@@ -27,6 +28,7 @@ function IsiIdentitasTab() {
       formdata.append("name", data.name);
       formdata.append("nik", data.nik);
       formdata.append("phone", data.phone);
+      formdata.append("email", data.email);
       formdata.append("avatar", avaBlob, `foto_${data.name}.jpg`);
       formdata.append("sub_layanan_id", data.sub_layanan_id);
       formdata.append("key", process.env.REACT_APP_API_KEY);
@@ -99,6 +101,15 @@ function IsiIdentitasTab() {
               name="phone"
               type="number"
               value={data.phone}
+              onChange={inputChangeHandler}
+            />
+          </div>
+          <div className="form-group">
+            <label>Nomor Telepon</label>
+            <input
+              type="email"
+              name="email"
+              value={data.email}
               onChange={inputChangeHandler}
             />
           </div>
