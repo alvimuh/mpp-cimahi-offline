@@ -105,7 +105,7 @@ function IsiIdentitasTab() {
             />
           </div>
           <div className="form-group">
-            <label>Nomor Telepon</label>
+            <label>Alamat Email</label>
             <input
               type="email"
               name="email"
