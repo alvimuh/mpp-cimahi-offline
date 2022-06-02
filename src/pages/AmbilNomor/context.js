@@ -43,7 +43,7 @@ function reducer(state, action) {
       return {
         ...state,
         loading: false,
-        ctaDisabled: false,
+        ctaDisabled: true,
         instansi: action.instansi,
       };
     }
@@ -51,7 +51,7 @@ function reducer(state, action) {
       return {
         ...state,
         loading: false,
-        ctaDisabled: false,
+        ctaDisabled: true,
         layanan: action.layanan,
         step: 1,
       };

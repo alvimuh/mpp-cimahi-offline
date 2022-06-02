@@ -113,7 +113,18 @@ input[type="radio"] {
   outline-color: #547a9f;
   border: 2px solid #dee0e2;
 }
-
+#__react-alert__ button{
+  background: none;
+  padding: 0;
+}
+#__react-alert__ div div div {
+  margin: 0.5rem!important;
+  width: 100%!important;
+  font-size: 1.2rem!important;
+  font-weight: 600;
+  text-transform: capitalize!important;
+  padding: 1.5rem!important;
+}
 button {
   cursor: pointer;
   border: 0;
@@ -146,6 +157,7 @@ button.cta {
   gap: 14px;
   list-style: none;
   padding: 12px;
+  width: 100%;
 }
 .select .item {
   display: block;

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-// import PropTypes from "prop-types";
 import Webcam from "../../components/WebCam/Webcam";
 import axios from "axios";
 import { useAntrian } from "./context";
-import { useAlert } from "react-alert";
+import { useAlert, positions } from "react-alert";
 function IsiIdentitasTab() {
   const { state, dispatch } = useAntrian();
   const alert = useAlert();
@@ -15,41 +14,61 @@ function IsiIdentitasTab() {
     email: "",
     sub_layanan_id: state.layananSelected,
   });
+  const [errors, setErrors] = useState([]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    try {
-      dispatch({
-        type: "LOADING",
-      });
-      let formdata = new FormData();
-      const avaBlob = await (await fetch(data.avatar)).blob();
-      formdata.append("key", process.env.REACT_APP_API_KEY);
-      formdata.append("name", data.name);
-      formdata.append("nik", data.nik);
-      formdata.append("phone", data.phone);
-      formdata.append("email", data.email);
-      formdata.append("avatar", avaBlob, `foto_${data.name}.jpg`);
-      formdata.append("sub_layanan_id", data.sub_layanan_id);
-      formdata.append("key", process.env.REACT_APP_API_KEY);
-      const res = await axios.post(
-        `${process.env.REACT_APP_API_URL}/internal/antrian`,
-        formdata,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      dispatch({
-        type: "SET_ANTRIAN",
-        data: res.data,
-      });
-    } catch (error) {
-      alert.show("Oh look, an alert!");
-      dispatch({
-        type: "STOP_LOADING",
-      });
+    for (let key in data) {
+      if (!data[key]) {
+        const alertMessages = {
+          nik: "Mohon mengisi NIK terlebih dahulu",
+          name: "Mohon mengisi Nama terlebih dahulu",
+          phone: "Mohon mengisi No. HP terlebih dahulu",
+          email: "Mohon mengisi Email terlebih dahulu",
+          avatar: "Mohon mengambil Foto terlebih dahulu",
+        };
+        alert.error(alertMessages[key], {
+          position: positions.TOP_CENTER,
+        });
+        return;
+      }
+    }
+    if (errors.length === 0) {
+      try {
+        dispatch({
+          type: "LOADING",
+        });
+        let formdata = new FormData();
+        const avaBlob = await (await fetch(data.avatar)).blob();
+        formdata.append("key", process.env.REACT_APP_API_KEY);
+        formdata.append("name", data.name);
+        formdata.append("nik", data.nik);
+        formdata.append("phone", data.phone);
+        formdata.append("email", data.email);
+        formdata.append("avatar", avaBlob, `foto_${data.name}.jpg`);
+        formdata.append("sub_layanan_id", data.sub_layanan_id);
+        formdata.append("key", process.env.REACT_APP_API_KEY);
+        const res = await axios.post(
+          `${process.env.REACT_APP_API_URL}/internal/antrian`,
+          formdata,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        dispatch({
+          type: "SET_ANTRIAN",
+          data: res.data,
+        });
+      } catch (error) {
+        alert.show("Terjadi kesalahan pada sistem, harap coba lagi.", {
+          position: positions.TOP_CENTER,
+        });
+        dispatch({
+          type: "STOP_LOADING",
+        });
+      }
     }
   };
 
@@ -78,7 +97,6 @@ function IsiIdentitasTab() {
           <div className="form-group">
             <label>Nomor Induk Kependudukan</label>
             <input
-              type="text"
               name="nik"
               type="number"
               value={data.nik}

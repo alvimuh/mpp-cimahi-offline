@@ -7,6 +7,7 @@
   gap: 14px;
   list-style: none;
   padding: 12px;
+  width: 100%;
 }
 .select .item {
   display: block;
