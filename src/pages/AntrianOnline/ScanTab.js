@@ -40,7 +40,7 @@ function IsiIdentitasTab() {
       }
     } catch (error) {
       alert.error(
-        "Terjadi kesalahan siste, atau kode booking tidak ditemukan. Silakan coba lagi.",
+        "Terjadi kesalahan sistem, atau kode booking tidak ditemukan. Silakan coba lagi.",
         {
           position: positions.TOP_CENTER,
         }
