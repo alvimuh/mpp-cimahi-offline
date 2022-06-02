@@ -4,7 +4,7 @@ import "./style.css";
 import QrReader from "react-qr-reader";
 import axios from "axios";
 import { useAntrian } from "./context";
-import { useAlert } from "react-alert";
+import { useAlert, positions } from "react-alert";
 
 function IsiIdentitasTab() {
   const { state, dispatch } = useAntrian();
@@ -25,12 +25,26 @@ function IsiIdentitasTab() {
         `${process.env.REACT_APP_API_URL}/internal/booking/cek`,
         { ...data, key: process.env.REACT_APP_API_KEY }
       );
-      dispatch({
-        type: "SET_BOOKING",
-        data: res.data,
-      });
+      if (res.data) {
+        dispatch({
+          type: "SET_BOOKING",
+          data: res.data,
+        });
+      } else {
+        alert.error(
+          "Kode booking tidak ditemukan. Pastikan kode yang diisikan sudah benar.",
+          {
+            position: positions.TOP_CENTER,
+          }
+        );
+      }
     } catch (error) {
-      alert.show("Oh look, an alert!");
+      alert.error(
+        "Terjadi kesalahan siste, atau kode booking tidak ditemukan. Silakan coba lagi.",
+        {
+          position: positions.TOP_CENTER,
+        }
+      );
       dispatch({
         type: "STOP_LOADING",
       });

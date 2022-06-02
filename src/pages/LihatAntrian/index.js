@@ -18,14 +18,6 @@ function LihatAntrian() {
     if (num.length === 1) {
       await playing(process.env.PUBLIC_URL + "/sound/" + num[0] + ".wav");
     } else {
-      // if (num.length === 3) {
-      //   if (num[0] === "1") {
-      //     await playing(process.env.PUBLIC_URL + "/sound/seratus.wav");
-      //   } else {
-      //     await playing(process.env.PUBLIC_URL + "/sound/" + num[0] + ".wav");
-      //     await playing(process.env.PUBLIC_URL + "/sound/ratus.wav");
-      //   }
-      // }
       if (num[0] === "1" && num[1] === "0") {
         await playing(process.env.PUBLIC_URL + "/sound/sepuluh.wav");
       } else if (num[0] === "1" && num[1] === "1") {
@@ -54,12 +46,6 @@ function LihatAntrian() {
     });
     if (target !== -1) tempData[target] = newData;
 
-    // data.map((el) => {
-    //   if (el.loket == newData.no_loket) {
-    //     el.name = newData.name;
-    //     el.urutan = newData.urutan;
-    //   }
-    // });
     setData(
       tempData.sort((a, b) =>
         a.loket > b.loket ? 1 : b.loket > a.loket ? -1 : 0
@@ -121,7 +107,7 @@ function LihatAntrian() {
         for (let i = 0; i < dataApi.length; i++) {
           if (el.loket === dataApi[i].no_loket) {
             el.urutan = dataApi[i].urutan;
-            el.name = dataApi[i].name;
+            el.name = dataApi[i].nama_sub_layanan;
           }
         }
       });
@@ -142,8 +128,8 @@ function LihatAntrian() {
       pusherChannel.unbind("panggil_antrian");
       pusherChannel.bind("panggil_antrian", (antrianData) => {
         newAntrianHandler({
-          name: antrianData.name,
-          nik: antrianData.nik,
+          name: antrianData.nama_sub_layanan,
+          tenant: antrianData.nama_layanan,
           urutan: antrianData.urutan,
           loket: antrianData.no_loket,
           avatar_url: antrianData.avatar,
@@ -173,7 +159,7 @@ function LihatAntrian() {
           <div className="box">
             <img src={calling.avatar_url} alt="foto" />
             <h1>{calling.name}</h1>
-            <p>NIK:{calling.nik}</p>
+            <p>{calling.tenant}</p>
           </div>
         </div>
       </main>
